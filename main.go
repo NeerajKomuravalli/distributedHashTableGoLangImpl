@@ -15,7 +15,9 @@ var hashTableData = model.Hashtable{}
 func getData(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
+	hashTableData.Lock.Lock()
 	value, ifValueFound := hashTableData.Item[params["id"]]
+	hashTableData.Lock.Unlock()
 	if !ifValueFound {
 		errorResp := model.ResponseData{
 			Success:      false,
@@ -47,10 +49,12 @@ func putData(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(errorResp)
 		return
 	}
+	hashTableData.Lock.Lock()
 	if hashTableData.Item == nil {
 		hashTableData.Item = make(map[string]int)
 	}
 	hashTableData.Item[userData.Id] = userData.Value
+	hashTableData.Lock.Unlock()
 	successResp := model.ResponseData{
 		Success: true,
 		Data:    userData,
@@ -61,6 +65,7 @@ func putData(w http.ResponseWriter, r *http.Request) {
 func deleteData(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
+	hashTableData.Lock.Lock()
 	value, ifValueFound := hashTableData.Item[params["id"]]
 	if !ifValueFound {
 		errorResp := model.ResponseData{
@@ -71,6 +76,7 @@ func deleteData(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	delete(hashTableData.Item, params["id"])
+	hashTableData.Lock.Unlock()
 	userData := model.UserSentData{
 		Id:    params["id"],
 		Value: value,

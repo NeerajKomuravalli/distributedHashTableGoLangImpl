@@ -5,46 +5,30 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"sync"
 
+	"github.com/NeerajKomuravalli/distributedHashTableGoLangImpl/model"
 	"github.com/gorilla/mux"
 )
 
-type Hashtable struct {
-	Item map[string]int
-	Lock sync.RWMutex
-}
-
-type userSentData struct {
-	Id    string `json:id`
-	Value int    `json:value`
-}
-
-type responseData struct {
-	Success      bool         `json:success`
-	ErrorMessage string       `json:error,omitempty`
-	Data         userSentData `json:data,omitempty`
-}
-
-var hashTableData = Hashtable{}
+var hashTableData = model.Hashtable{}
 
 func getData(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
 	value, ifValueFound := hashTableData.Item[params["id"]]
 	if !ifValueFound {
-		errorResp := responseData{
+		errorResp := model.ResponseData{
 			Success:      false,
 			ErrorMessage: fmt.Sprintf("The id %s is not found in the table", params["id"]),
 		}
 		json.NewEncoder(w).Encode(errorResp)
 		return
 	}
-	userData := userSentData{
+	userData := model.UserSentData{
 		Id:    params["id"],
 		Value: value,
 	}
-	successResp := responseData{
+	successResp := model.ResponseData{
 		Success: true,
 		Data:    userData,
 	}
@@ -53,10 +37,10 @@ func getData(w http.ResponseWriter, r *http.Request) {
 
 func putData(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	userData := userSentData{}
+	userData := model.UserSentData{}
 	err := json.NewDecoder(r.Body).Decode(&userData)
 	if err != nil {
-		errorResp := responseData{
+		errorResp := model.ResponseData{
 			Success:      false,
 			ErrorMessage: err.Error(),
 		}
@@ -67,7 +51,7 @@ func putData(w http.ResponseWriter, r *http.Request) {
 		hashTableData.Item = make(map[string]int)
 	}
 	hashTableData.Item[userData.Id] = userData.Value
-	successResp := responseData{
+	successResp := model.ResponseData{
 		Success: true,
 		Data:    userData,
 	}
@@ -79,7 +63,7 @@ func deleteData(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	value, ifValueFound := hashTableData.Item[params["id"]]
 	if !ifValueFound {
-		errorResp := responseData{
+		errorResp := model.ResponseData{
 			Success:      false,
 			ErrorMessage: fmt.Sprintf("The id %s you want to delete is not present in the table", params["id"]),
 		}
@@ -87,11 +71,11 @@ func deleteData(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	delete(hashTableData.Item, params["id"])
-	userData := userSentData{
+	userData := model.UserSentData{
 		Id:    params["id"],
 		Value: value,
 	}
-	successResp := responseData{
+	successResp := model.ResponseData{
 		Success: true,
 		Data:    userData,
 	}
@@ -102,7 +86,7 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/Get/{id}", getData).Methods("GET")
 	router.HandleFunc("/Put/", putData).Methods("POST")
-	router.HandleFunc("/Delete/{id}", deleteData).Methods("POST")
+	router.HandleFunc("/Delete/{id}", deleteData).Methods("DELETE")
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }

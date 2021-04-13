@@ -89,7 +89,7 @@ func deleteData(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	router := mux.NewRouter().StrictSlash(true)
+	router := mux.NewRouter()
 	router.HandleFunc("/Get/{id}", getData).Methods("GET")
 	router.HandleFunc("/Put/", putData).Methods("POST")
 	router.HandleFunc("/Delete/{id}", deleteData).Methods("DELETE")

@@ -1,8 +1,8 @@
 package model
 
 type UserSentData struct {
-	Id    string `json:"id"`
-	Value int    `json:"value"`
+	Id    string      `json:"id"`
+	Value interface{} `json:"value"`
 }
 
 type ResponseData struct {

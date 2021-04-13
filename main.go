@@ -51,7 +51,7 @@ func putData(w http.ResponseWriter, r *http.Request) {
 	}
 	hashTableData.Lock.Lock()
 	if hashTableData.Item == nil {
-		hashTableData.Item = make(map[string]int)
+		hashTableData.Item = make(map[string]interface{})
 	}
 	hashTableData.Item[userData.Id] = userData.Value
 	hashTableData.Lock.Unlock()

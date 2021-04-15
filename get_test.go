@@ -3,7 +3,6 @@ package main
 import (
 	"net/http"
 	"net/http/httptest"
-	"strings"
 	"testing"
 
 	"github.com/gorilla/mux"
@@ -29,10 +28,7 @@ func TestGetSampleDataSuccess(t *testing.T) {
 			status, http.StatusOK)
 	}
 	expected := `{"success":true,"data":{"id":"112","value":112}}`
-	if strings.TrimRight(rr.Body.String(), "\n") != expected {
-		t.Errorf("handler returned unexpected body: got %v want %v",
-			rr.Body.String(), expected)
-	}
+	ResponseRecorderComparisonWithExpectedOut(t, rr, expected)
 }
 
 func TestGetSampleDataFailure(t *testing.T) {
@@ -53,8 +49,5 @@ func TestGetSampleDataFailure(t *testing.T) {
 			status, http.StatusOK)
 	}
 	expected := `{"success":false,"error":"The id 113 is not found in the table"}`
-	if strings.TrimRight(rr.Body.String(), "\n") != expected {
-		t.Errorf("handler returned unexpected body: got %v want %v",
-			rr.Body.String(), expected)
-	}
+	ResponseRecorderComparisonWithExpectedOut(t, rr, expected)
 }

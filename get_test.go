@@ -8,17 +8,21 @@ import (
 	"github.com/gorilla/mux"
 )
 
+func AddParametersToRequest(req *http.Request, parameter string) *http.Request {
+	vars := map[string]string{
+		"id": parameter,
+	}
+	return mux.SetURLVars(req, vars)
+}
+
 func TestGetSampleDataSuccess(t *testing.T) {
 	PostSampleData(t, `{"id":"112","value":112}`)
 
 	req, err := http.NewRequest("GET", "/Get", nil)
-	vars := map[string]string{
-		"id": "112",
-	}
-	req = mux.SetURLVars(req, vars)
 	if err != nil {
 		t.Fatal(err)
 	}
+	req = AddParametersToRequest(req, "112")
 	rr := httptest.NewRecorder()
 	handler := http.HandlerFunc(getData)
 

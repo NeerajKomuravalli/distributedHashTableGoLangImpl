@@ -30,15 +30,19 @@ func PostSampleData(t *testing.T, data string) *httptest.ResponseRecorder {
 	return rr
 }
 
+func ResponseRecorderComparisonWithExpectedOut(t *testing.T, rr *httptest.ResponseRecorder, expected string) {
+	if strings.TrimRight(rr.Body.String(), "\n") != expected {
+		t.Errorf("handler returned unexpected body: got %v want %v",
+			rr.Body.String(), expected)
+	}
+}
+
 func TestPostDataSuccess(t *testing.T) {
 	jsonStr := `{"id":"111","value":111}`
 	rr := PostSampleData(t, jsonStr)
 	expected := `{"success":true,"data":{"id":"111","value":111}}`
 	// the strings that you read from STDIN has a trailing \n that's why we need to trip it
-	if strings.TrimRight(rr.Body.String(), "\n") != expected {
-		t.Errorf("handler returned unexpected body: got %v want %v",
-			rr.Body.String(), expected)
-	}
+	ResponseRecorderComparisonWithExpectedOut(t, rr, expected)
 }
 
 func TestPostDataFailure(t *testing.T) {
@@ -46,8 +50,5 @@ func TestPostDataFailure(t *testing.T) {
 	PostSampleData(t, jsonStr)
 	rr := PostSampleData(t, jsonStr)
 	expected := `{"success":false,"error":"The id 111 you want to add is already present in the table, please use Update method to update any value"}`
-	if strings.TrimRight(rr.Body.String(), "\n") != expected {
-		t.Errorf("handler returned unexpected body: got %v want %v",
-			rr.Body.String(), expected)
-	}
+	ResponseRecorderComparisonWithExpectedOut(t, rr, expected)
 }

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "./nodeModel";
+
+service Chord {
+    rpc Ping(Request) returns (Response);
+}
+
+message Request{
+
+}
+
+message Response {
+    string Message = 1;
+}

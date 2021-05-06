@@ -5,6 +5,7 @@ option go_package = "./chordAdminModel";
 service ChordAdmin {
     rpc AddActiveNode(Node) returns (Success);
     rpc GetActiveNodes(ActiveNodesRequest) returns (ActiveNodes);
+    rpc TotalNumberOfActiveNodes(NumberOfActiveNodes) returns (TotalNumberOfNodes);
 }
 
 message Success {
@@ -15,10 +16,18 @@ message ActiveNodesRequest {
 
 }
 
+message NumberOfActiveNodes {
+
+}
+
 message ActiveNodes {
     repeated Node nodes = 1;
 }
 
 message Node {
     string Id = 1;
+}
+
+message TotalNumberOfNodes {
+    uint64 Number = 1;
 }

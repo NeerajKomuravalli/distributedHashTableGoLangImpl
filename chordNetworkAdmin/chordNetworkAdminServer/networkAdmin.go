@@ -1,4 +1,4 @@
-package chordNetworkAdmin
+package chordNetworkAdminServer
 
 import (
 	"context"

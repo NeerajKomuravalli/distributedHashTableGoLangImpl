@@ -1,18 +1,21 @@
-package chordNetworkAdmin
+package main
 
 import (
 	"log"
 	"net"
 
+	"github.com/NeerajKomuravalli/distributedHashTableGoLangImpl/chordNetworkAdmin/chordNetworkAdminServer"
 	"github.com/NeerajKomuravalli/distributedHashTableGoLangImpl/models/proto/chordAdmin/chordAdminModel"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
 
-func ServeChordNetworkAdmin(ipAddress string) *grpc.Server {
+var ipAddress = ":9090"
+
+func main() {
 	gs := grpc.NewServer()
 
-	server := NewNetworkAdminServer()
+	server := chordNetworkAdminServer.NewNetworkAdminServer()
 
 	// register the temepfrature conversion server
 	chordAdminModel.RegisterChordAdminServer(gs, server)
@@ -25,6 +28,5 @@ func ServeChordNetworkAdmin(ipAddress string) *grpc.Server {
 	if err != nil {
 		log.Fatal("Unable to listen")
 	}
-	go gs.Serve(listen)
-	return gs
+	gs.Serve(listen)
 }

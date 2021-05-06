@@ -22,3 +22,9 @@ func (networkServer *NetworkAdminServer) AddActiveNode(ctx context.Context, node
 func (networkServer *NetworkAdminServer) GetActiveNodes(ctx context.Context, req *chordAdminModel.ActiveNodesRequest) (*chordAdminModel.ActiveNodes, error) {
 	return ActiveNodes, nil
 }
+
+func (networkServer *NetworkAdminServer) TotalNumberOfActiveNodes(ctx context.Context, req *chordAdminModel.NumberOfActiveNodes) (*chordAdminModel.TotalNumberOfNodes, error) {
+	TotalNumberOfNodes := new(chordAdminModel.TotalNumberOfNodes)
+	TotalNumberOfNodes.Number = uint64(len(ActiveNodes.Nodes))
+	return TotalNumberOfNodes, nil
+}

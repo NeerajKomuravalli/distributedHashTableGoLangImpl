@@ -2,6 +2,7 @@ package chordNetworkAdminServer
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/NeerajKomuravalli/distributedHashTableGoLangImpl/models/proto/chordAdmin/chordAdminModel"
 )
@@ -15,8 +16,26 @@ func NewNetworkAdminServer() *NetworkAdminServer {
 var ActiveNodes = new(chordAdminModel.ActiveNodes)
 
 func (networkServer *NetworkAdminServer) AddActiveNode(ctx context.Context, node *chordAdminModel.Node) (*chordAdminModel.Success, error) {
+	// Check if the mode exists and if it does then return success as false
+	found, _ := Search(ActiveNodes, node.Id)
+	if found {
+		return &chordAdminModel.Success{Success: false}, fmt.Errorf("node already present")
+	}
 	ActiveNodes.Nodes = append(ActiveNodes.Nodes, node)
 	return &chordAdminModel.Success{Success: true}, nil
+}
+
+// Search in ActiveNodes.Nodes to make sure same ip is not added twice
+// And yes, this is a linear search and also known as the worst search possible.
+// I am doing this to save time and will readdress this to make it optimal when
+// I have time
+func Search(activeNodes *chordAdminModel.ActiveNodes, id string) (bool, int) {
+	for index, v := range activeNodes.Nodes {
+		if v.Id == id {
+			return true, index
+		}
+	}
+	return false, len(activeNodes.Nodes)
 }
 
 func (networkServer *NetworkAdminServer) GetActiveNodes(ctx context.Context, req *chordAdminModel.ActiveNodesRequest) (*chordAdminModel.ActiveNodes, error) {

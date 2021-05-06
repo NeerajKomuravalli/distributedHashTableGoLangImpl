@@ -1,7 +1,7 @@
 package chord
 
 import (
-	"github.com/NeerajKomuravalli/distributedHashTableGoLangImpl/models/proto/chordModel"
+	"github.com/NeerajKomuravalli/distributedHashTableGoLangImpl/models/proto/chordNode/chordNodeModel"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -9,7 +9,7 @@ import (
 func (node *Node) ServeGrpc() {
 	gs := grpc.NewServer()
 
-	chordModel.RegisterChordServer(gs, node)
+	chordNodeModel.RegisterChordServer(gs, node)
 
 	reflection.Register(gs)
 

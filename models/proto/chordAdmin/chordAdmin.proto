@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option go_package = "./chordAdminModel";
+
+service ChordAdmin {
+    rpc AddActiveNode(Node) returns (Success);
+    rpc GetActiveNodes(ActiveNodesRequest) returns (ActiveNodes);
+}
+
+message Success {
+    bool Success = 1;
+}
+
+message ActiveNodesRequest {
+
+}
+
+message ActiveNodes {
+    repeated Node nodes = 1;
+}
+
+message Node {
+    string Id = 1;
+}

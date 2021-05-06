@@ -5,7 +5,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/NeerajKomuravalli/distributedHashTableGoLangImpl/models/proto/nodeModel"
+	"github.com/NeerajKomuravalli/distributedHashTableGoLangImpl/models/proto/chordModel"
 )
 
 func NewNode(id string) *Node {
@@ -19,6 +19,6 @@ func NewNode(id string) *Node {
 	}
 }
 
-func (node *Node) Ping(ctx context.Context, req *nodeModel.Request) (*nodeModel.Response, error) {
-	return &nodeModel.Response{Message: "Hello World!"}, nil
+func (node *Node) Ping(ctx context.Context, req *chordModel.Request) (*chordModel.Response, error) {
+	return &chordModel.Response{Message: "Hello World!"}, nil
 }

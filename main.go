@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/NeerajKomuravalli/distributedHashTableGoLangImpl/chord"
-	"github.com/NeerajKomuravalli/distributedHashTableGoLangImpl/models/proto/nodeModel"
+	"github.com/NeerajKomuravalli/distributedHashTableGoLangImpl/models/proto/chordModel"
 )
 
 func main() {
@@ -16,8 +16,8 @@ func main() {
 
 	conn := node2.DialGrpc(node1.Id)
 	defer conn.Close()
-	client := nodeModel.NewChordClient(conn)
-	resp, err := client.Ping(context.Background(), &nodeModel.Request{})
+	client := chordModel.NewChordClient(conn)
+	resp, err := client.Ping(context.Background(), &chordModel.Request{})
 	if err != nil {
 		panic(err)
 	}

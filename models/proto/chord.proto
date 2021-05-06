@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "./nodeModel";
+option go_package = "./chordModel";
 
 service Chord {
     rpc Ping(Request) returns (Response);

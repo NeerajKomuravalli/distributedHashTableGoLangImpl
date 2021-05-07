@@ -13,3 +13,7 @@ message Request{
 message Response {
     string Message = 1;
 }
+
+message Node {
+    string Id = 1;
+}

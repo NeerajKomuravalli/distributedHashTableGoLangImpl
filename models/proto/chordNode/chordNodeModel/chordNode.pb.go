@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.26.0
 // 	protoc        v3.15.8
-// source: chordNode.proto
+// source: models/proto/chordNode/chordNode.proto
 
 package chordNodeModel
 
@@ -33,7 +33,7 @@ type Request struct {
 func (x *Request) Reset() {
 	*x = Request{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_chordNode_proto_msgTypes[0]
+		mi := &file_models_proto_chordNode_chordNode_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -46,7 +46,7 @@ func (x *Request) String() string {
 func (*Request) ProtoMessage() {}
 
 func (x *Request) ProtoReflect() protoreflect.Message {
-	mi := &file_chordNode_proto_msgTypes[0]
+	mi := &file_models_proto_chordNode_chordNode_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -59,7 +59,7 @@ func (x *Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Request.ProtoReflect.Descriptor instead.
 func (*Request) Descriptor() ([]byte, []int) {
-	return file_chordNode_proto_rawDescGZIP(), []int{0}
+	return file_models_proto_chordNode_chordNode_proto_rawDescGZIP(), []int{0}
 }
 
 type Response struct {
@@ -73,7 +73,7 @@ type Response struct {
 func (x *Response) Reset() {
 	*x = Response{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_chordNode_proto_msgTypes[1]
+		mi := &file_models_proto_chordNode_chordNode_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -86,7 +86,7 @@ func (x *Response) String() string {
 func (*Response) ProtoMessage() {}
 
 func (x *Response) ProtoReflect() protoreflect.Message {
-	mi := &file_chordNode_proto_msgTypes[1]
+	mi := &file_models_proto_chordNode_chordNode_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -99,7 +99,7 @@ func (x *Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Response.ProtoReflect.Descriptor instead.
 func (*Response) Descriptor() ([]byte, []int) {
-	return file_chordNode_proto_rawDescGZIP(), []int{1}
+	return file_models_proto_chordNode_chordNode_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Response) GetMessage() string {
@@ -109,38 +109,89 @@ func (x *Response) GetMessage() string {
 	return ""
 }
 
-var File_chordNode_proto protoreflect.FileDescriptor
+type Node struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
 
-var file_chordNode_proto_rawDesc = []byte{
-	0x0a, 0x0f, 0x63, 0x68, 0x6f, 0x72, 0x64, 0x4e, 0x6f, 0x64, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x22, 0x09, 0x0a, 0x07, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x24, 0x0a, 0x08,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x4d, 0x65, 0x73, 0x73,
-	0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x4d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x65, 0x32, 0x24, 0x0a, 0x05, 0x43, 0x68, 0x6f, 0x72, 0x64, 0x12, 0x1b, 0x0a, 0x04, 0x50,
-	0x69, 0x6e, 0x67, 0x12, 0x08, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x09, 0x2e,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x12, 0x5a, 0x10, 0x2e, 0x2f, 0x63, 0x68,
-	0x6f, 0x72, 0x64, 0x4e, 0x6f, 0x64, 0x65, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	Id string `protobuf:"bytes,1,opt,name=Id,proto3" json:"Id,omitempty"`
+}
+
+func (x *Node) Reset() {
+	*x = Node{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_models_proto_chordNode_chordNode_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Node) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Node) ProtoMessage() {}
+
+func (x *Node) ProtoReflect() protoreflect.Message {
+	mi := &file_models_proto_chordNode_chordNode_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Node.ProtoReflect.Descriptor instead.
+func (*Node) Descriptor() ([]byte, []int) {
+	return file_models_proto_chordNode_chordNode_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Node) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+var File_models_proto_chordNode_chordNode_proto protoreflect.FileDescriptor
+
+var file_models_proto_chordNode_chordNode_proto_rawDesc = []byte{
+	0x0a, 0x26, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x73, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x63,
+	0x68, 0x6f, 0x72, 0x64, 0x4e, 0x6f, 0x64, 0x65, 0x2f, 0x63, 0x68, 0x6f, 0x72, 0x64, 0x4e, 0x6f,
+	0x64, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x09, 0x0a, 0x07, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x22, 0x24, 0x0a, 0x08, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x18, 0x0a, 0x07, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x07, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x16, 0x0a, 0x04, 0x4e, 0x6f, 0x64,
+	0x65, 0x12, 0x0e, 0x0a, 0x02, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x49,
+	0x64, 0x32, 0x24, 0x0a, 0x05, 0x43, 0x68, 0x6f, 0x72, 0x64, 0x12, 0x1b, 0x0a, 0x04, 0x50, 0x69,
+	0x6e, 0x67, 0x12, 0x08, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x09, 0x2e, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x12, 0x5a, 0x10, 0x2e, 0x2f, 0x63, 0x68, 0x6f,
+	0x72, 0x64, 0x4e, 0x6f, 0x64, 0x65, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
-	file_chordNode_proto_rawDescOnce sync.Once
-	file_chordNode_proto_rawDescData = file_chordNode_proto_rawDesc
+	file_models_proto_chordNode_chordNode_proto_rawDescOnce sync.Once
+	file_models_proto_chordNode_chordNode_proto_rawDescData = file_models_proto_chordNode_chordNode_proto_rawDesc
 )
 
-func file_chordNode_proto_rawDescGZIP() []byte {
-	file_chordNode_proto_rawDescOnce.Do(func() {
-		file_chordNode_proto_rawDescData = protoimpl.X.CompressGZIP(file_chordNode_proto_rawDescData)
+func file_models_proto_chordNode_chordNode_proto_rawDescGZIP() []byte {
+	file_models_proto_chordNode_chordNode_proto_rawDescOnce.Do(func() {
+		file_models_proto_chordNode_chordNode_proto_rawDescData = protoimpl.X.CompressGZIP(file_models_proto_chordNode_chordNode_proto_rawDescData)
 	})
-	return file_chordNode_proto_rawDescData
+	return file_models_proto_chordNode_chordNode_proto_rawDescData
 }
 
-var file_chordNode_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_chordNode_proto_goTypes = []interface{}{
+var file_models_proto_chordNode_chordNode_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_models_proto_chordNode_chordNode_proto_goTypes = []interface{}{
 	(*Request)(nil),  // 0: Request
 	(*Response)(nil), // 1: Response
+	(*Node)(nil),     // 2: Node
 }
-var file_chordNode_proto_depIdxs = []int32{
+var file_models_proto_chordNode_chordNode_proto_depIdxs = []int32{
 	0, // 0: Chord.Ping:input_type -> Request
 	1, // 1: Chord.Ping:output_type -> Response
 	1, // [1:2] is the sub-list for method output_type
@@ -150,13 +201,13 @@ var file_chordNode_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_chordNode_proto_init() }
-func file_chordNode_proto_init() {
-	if File_chordNode_proto != nil {
+func init() { file_models_proto_chordNode_chordNode_proto_init() }
+func file_models_proto_chordNode_chordNode_proto_init() {
+	if File_models_proto_chordNode_chordNode_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_chordNode_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_models_proto_chordNode_chordNode_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Request); i {
 			case 0:
 				return &v.state
@@ -168,8 +219,20 @@ func file_chordNode_proto_init() {
 				return nil
 			}
 		}
-		file_chordNode_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_models_proto_chordNode_chordNode_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Response); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_models_proto_chordNode_chordNode_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Node); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -185,20 +248,20 @@ func file_chordNode_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_chordNode_proto_rawDesc,
+			RawDescriptor: file_models_proto_chordNode_chordNode_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_chordNode_proto_goTypes,
-		DependencyIndexes: file_chordNode_proto_depIdxs,
-		MessageInfos:      file_chordNode_proto_msgTypes,
+		GoTypes:           file_models_proto_chordNode_chordNode_proto_goTypes,
+		DependencyIndexes: file_models_proto_chordNode_chordNode_proto_depIdxs,
+		MessageInfos:      file_models_proto_chordNode_chordNode_proto_msgTypes,
 	}.Build()
-	File_chordNode_proto = out.File
-	file_chordNode_proto_rawDesc = nil
-	file_chordNode_proto_goTypes = nil
-	file_chordNode_proto_depIdxs = nil
+	File_models_proto_chordNode_chordNode_proto = out.File
+	file_models_proto_chordNode_chordNode_proto_rawDesc = nil
+	file_models_proto_chordNode_chordNode_proto_goTypes = nil
+	file_models_proto_chordNode_chordNode_proto_depIdxs = nil
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -278,5 +341,5 @@ var _Chord_serviceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "chordNode.proto",
+	Metadata: "models/proto/chordNode/chordNode.proto",
 }

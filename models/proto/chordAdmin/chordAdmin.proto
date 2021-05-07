@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "models/proto/chordNode/chordNode.proto";
+
 option go_package = "./chordAdminModel";
 
 service ChordAdmin {
@@ -22,10 +24,6 @@ message NumberOfActiveNodes {
 
 message ActiveNodes {
     repeated Node nodes = 1;
-}
-
-message Node {
-    string Id = 1;
 }
 
 message TotalNumberOfNodes {

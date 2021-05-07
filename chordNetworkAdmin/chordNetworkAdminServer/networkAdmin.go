@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/NeerajKomuravalli/distributedHashTableGoLangImpl/models/proto/chordAdmin/chordAdminModel"
+	"github.com/NeerajKomuravalli/distributedHashTableGoLangImpl/models/proto/chordNode/chordNodeModel"
 )
 
 type NetworkAdminServer struct{}
@@ -15,7 +16,7 @@ func NewNetworkAdminServer() *NetworkAdminServer {
 
 var ActiveNodes = new(chordAdminModel.ActiveNodes)
 
-func (networkServer *NetworkAdminServer) AddActiveNode(ctx context.Context, node *chordAdminModel.Node) (*chordAdminModel.Success, error) {
+func (networkServer *NetworkAdminServer) AddActiveNode(ctx context.Context, node *chordNodeModel.Node) (*chordAdminModel.Success, error) {
 	// Check if the mode exists and if it does then return success as false
 	found, _ := search(ActiveNodes, node.Id)
 	if found {

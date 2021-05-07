@@ -4,6 +4,9 @@ option go_package = "./chordNodeModel";
 
 service Chord {
     rpc Ping(Request) returns (Response);
+    rpc FindSuccessor(Node) returns (Node);
+    rpc FindPredecessor(Node) returns (Node);
+    rpc FindClosestPrecedingFinger(Node) returns (Node);
 }
 
 message Request{
@@ -16,4 +19,5 @@ message Response {
 
 message Node {
     string Id = 1;
+    uint32 HashId = 2;
 }

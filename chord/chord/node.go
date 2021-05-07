@@ -14,14 +14,17 @@ func NewNode(id string) *Node {
 		log.Fatal("Unable to listen ", err)
 	}
 	node := Node{
-		Id:          id,
+		NodeDetails: chordNodeModel.Node{
+			Id:     "id",
+			HashId: GenerateHashId(id),
+		},
 		Listner:     listenr,
-		HashId:      GenerateHashId(id),
 		Successor:   nil,
 		Predecessor: nil,
 	}
 
-	node.HashIdFloat64 = float64(node.HashId)
+	// This is done to make mathematical operations optimal. This avoids repeated conversion
+	node.HashIdFloat64 = float64(node.NodeDetails.HashId)
 	node.GenerateNewFingerTable()
 	node.ServeGrpc()
 	return &node
@@ -31,18 +34,17 @@ func (node *Node) Ping(ctx context.Context, req *chordNodeModel.Request) (*chord
 	return &chordNodeModel.Response{Message: "Hello World!"}, nil
 }
 
-func (node *Node) FindSuccessor(id string) *Node {
-	if node.Id == id {
-		return node
-	} else {
-		return nil
-	}
+func (node *Node) FindSuccessor(ctx context.Context, nodeDetails *chordNodeModel.Node) (*chordNodeModel.Node, error) {
+	return nodeDetails, nil
 }
 
-func (node *Node) FindPredecessor(id string) *Node {
-	if node.Id == id {
-		return node
-	} else {
-		return nil
+func (node *Node) FindPredecessor(ctx context.Context, nodeDetails *chordNodeModel.Node) (*chordNodeModel.Node, error) {
+	return nodeDetails, nil
+}
+
+func (node *Node) FindClosestPrecedingFinger(ctx context.Context, nodeDetails *chordNodeModel.Node) (*chordNodeModel.Node, error) {
+	for i := int(HashIdSize) - 1; i >= 0; i-- {
+		// finger := node.FingerTable[i]
 	}
+	return nodeDetails, nil
 }

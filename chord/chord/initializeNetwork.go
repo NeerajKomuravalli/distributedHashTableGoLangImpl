@@ -5,7 +5,6 @@ import (
 	"log"
 
 	"github.com/NeerajKomuravalli/distributedHashTableGoLangImpl/models/proto/chordAdmin/chordAdminModel"
-	"github.com/NeerajKomuravalli/distributedHashTableGoLangImpl/models/proto/chordNode/chordNodeModel"
 )
 
 func InitializeNetwork(id string) *Node {
@@ -24,18 +23,17 @@ func InitializeNetwork(id string) *Node {
 		}
 		log.Fatal("Can't initialize the network as the network already has nodes present : ", activeNodes.Nodes)
 	}
-	// adminNode := chordAdminModel.Node{Id: id}
-	adminNode := chordNodeModel.Node{Id: id}
-	success, err := networkConn.AdminClient.AddActiveNode(context.Background(), &adminNode)
+	node := NewNode(id)
+	node.Successor = node
+	node.Predecessor = node
+
+	success, err := networkConn.AdminClient.AddActiveNode(context.Background(), node.NodeDetails)
 	if err != nil {
 		log.Fatal(err)
 	}
 	if !success.Success {
 		log.Fatal("Not able to add node to the network")
 	}
-	node := NewNode(id)
-	node.Successor = node
-	node.Predecessor = node
 
 	return node
 }

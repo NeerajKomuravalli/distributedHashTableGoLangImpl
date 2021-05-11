@@ -15,7 +15,7 @@ type FingerEntry struct {
 type FingerTable []FingerEntry
 
 type Node struct {
-	NodeDetails   chordNodeModel.Node
+	NodeDetails   *chordNodeModel.Node
 	Successor     *Node
 	FingerTable   FingerTable
 	Predecessor   *Node
